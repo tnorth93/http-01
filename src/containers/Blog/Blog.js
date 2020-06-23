@@ -27,6 +27,10 @@ class Blog extends Component {
             });
     }
 
+    postSelectedHandler = (id) => {
+        this.setState({selectedPostId: id});
+    }
+
     render () {
         const posts = this.state.posts.map(post => {
             return <Post
@@ -35,10 +39,6 @@ class Blog extends Component {
                 author={post.author}
                 clicked={() => this.postSelectedHandler(post.id)}/>
         });
-
-    postSelectedHandler = (id) => {
-        this.setState({selectedPostId: id});
-    }
 
         return (
             <div>
