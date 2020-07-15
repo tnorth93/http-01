@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Post from '../../../components/Post/Post';
 import axios from '../../../axios';
 import './Posts.module.css';
@@ -9,6 +10,7 @@ class Posts extends Component {
   }
 
   componentDidMount () {
+    console.log(this.props);
     axios.get('/posts')
         .then(response => {
             const posts = response.data.slice(0, 4);
@@ -51,4 +53,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+export default withRouter(post);
