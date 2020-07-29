@@ -16,7 +16,7 @@ class Blog extends Component {
                         <ul>
                             <li><NavLink to="/">Home</NavLink></li>
                             <li><NavLink to={{
-                                pathname: this.props.match.url + '/new-post',
+                                pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
                             }}>New Post</NavLink></li>
