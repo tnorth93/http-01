@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import './Blog.css';
 import Posts from '../Blog/Posts/Posts';
 import NewPost from './NewPost/NewPost';
-import axios from '../../axios';
+// import axios from '../../axios';
 
 class Blog extends Component {
+    state = {
+        auth: false,
+    }
     
 
     render () {
@@ -14,18 +17,23 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
-                                pathname: this.props.match.url + '/new-post',
+                            <li><NavLink to="/posts/" exact activeClassName="my-active" activeStyle={{color: '#fa923f', textDecoration: 'underline'}}>Posts</NavLink></li>
+                            <li><NavLink to={{
+                                pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
-                            }}>New Post</Link></li>
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
                 {/* <Route path="/" exact render={() => <h1>Home</h1>}/> */}
-                <Route path="/" exact component={Posts}/>
-                <Route path="/new-post" component={NewPost}/>
+                <Switch>
+                    {this.state.auth ? <Route path="/new-post" component={NewPost}/> : null}
+                    <Route path="/posts" component={Posts}/>
+                    <Route render={() => <h1>Not Found</h1>}/>
+                    {/* <Redirect from="/" to="/posts" /> */}
+                    {/* <Route path="/" component={Posts}/>  */}
+                </Switch>
             </div>
         );
     }
